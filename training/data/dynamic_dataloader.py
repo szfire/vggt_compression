@@ -47,7 +47,6 @@ class DynamicTorchDataset(ABC):
         # Extract aspect ratio and image number ranges from the configuration
         self.aspect_ratio_range = common_config.augs.aspects  # e.g., [0.5, 1.0]
         self.image_num_range = common_config.img_nums    # e.g., [2, 24]
-        print(f"\n\n\naspect ratio range = {self.aspect_ratio_range}, image num range = {self.image_num_range}")
 
         # Validate the aspect ratio and image number ranges
         if len(self.aspect_ratio_range) != 2 or self.aspect_ratio_range[0] > self.aspect_ratio_range[1]:
@@ -172,8 +171,16 @@ class DynamicBatchSampler(Sampler):
 
                 # Calculate batch size based on max images per GPU and current image number
                 batch_size = self.max_img_per_gpu / random_image_num
+
+                print(f"\n\n\nbatch_size1 = {batch_size}")
+
                 batch_size = np.floor(batch_size).astype(int)
+
+                print(f"batch_size2 = {batch_size}")
+
                 batch_size = max(1, batch_size)  # Ensure batch size is at least 1
+
+                print(f"batch_size3 = {batch_size}")
 
                 # Collect samples for the current batch
                 current_batch = []
