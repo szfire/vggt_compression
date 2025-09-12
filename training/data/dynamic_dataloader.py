@@ -170,18 +170,10 @@ class DynamicBatchSampler(Sampler):
                 )
 
                 # Calculate batch size based on max images per GPU and current image number
-                # batch_size = self.max_img_per_gpu / random_image_num
-
-                # print(f"\n\n\nbatch_size1 = {batch_size}")
-
-                # batch_size = np.floor(batch_size).astype(int)
-
-                # print(f"batch_size2 = {batch_size}")
-
-                # batch_size = max(1, batch_size)  # Ensure batch size is at least 1
-                batch_size = 1
-
-                print(f"batch_size3 = {batch_size}")
+                batch_size = self.max_img_per_gpu / random_image_num
+                batch_size = np.floor(batch_size).astype(int)
+                batch_size = max(1, batch_size)  # Ensure batch size is at least 1
+                print(f"\nbatch_size = {batch_size}")
 
                 # Collect samples for the current batch
                 current_batch = []
@@ -194,6 +186,8 @@ class DynamicBatchSampler(Sampler):
 
                 if not current_batch:
                     break  # No more data to yield
+                
+                print(f"\ncurrent_batch_size = {len(current_batch)}")
 
                 yield current_batch
 
