@@ -174,7 +174,6 @@ class DynamicBatchSampler(Sampler):
                 batch_size = np.floor(batch_size).astype(int)
                 batch_size = max(1, batch_size)  # Ensure batch size is at least 1
                 batch_size = 1
-                print(f"\nbatch_size = {batch_size}")
 
                 # Collect samples for the current batch
                 current_batch = []
@@ -183,18 +182,14 @@ class DynamicBatchSampler(Sampler):
                         item = next(sampler_iterator)  # item is (idx, aspect_ratio, image_num)
                         current_batch.append(item)
                     except StopIteration:
-                        print("\nStopIteration1")
                         break  # No more samples
 
                 if not current_batch:
                     break  # No more data to yield
-                
-                print(f"\ncurrent_batch_size = {len(current_batch)}")
 
                 yield current_batch
 
             except StopIteration:
-                print("\nStopIteration2")
                 break  # End of sampler's iterator
 
     def __len__(self):
