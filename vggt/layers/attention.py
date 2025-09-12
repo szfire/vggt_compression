@@ -49,7 +49,10 @@ class Attention(nn.Module):
 
     def forward(self, x: Tensor, pos=None) -> Tensor:
         B, N, C = x.shape
-        print(f"B = {B}, N = {N}, C = {C}\n")
+        print(f"B = {B}, N = {N}, C = {C}\nx.shape = {x.shape}\n")
+        if B == 0:
+            x.reshape(1, N, C)
+            print(f"x.shape = {x.shape}")
         qkv = self.qkv(x).reshape(B, N, 3, self.num_heads, self.head_dim).permute(2, 0, 3, 1, 4)
         q, k, v = qkv.unbind(0)
         q, k = self.q_norm(q), self.k_norm(k)
