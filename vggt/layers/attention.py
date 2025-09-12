@@ -51,7 +51,7 @@ class Attention(nn.Module):
         B, N, C = x.shape
         print(f"B = {B}, N = {N}, C = {C}\nx.shape = {x.shape}\n")
         if B == 0:
-            x = [x,]
+            x = x.unsqueeze(0)
             print(f"x.shape = {x.shape}")
             B = 1
         qkv = self.qkv(x).reshape(B, N, 3, self.num_heads, self.head_dim).permute(2, 0, 3, 1, 4)
