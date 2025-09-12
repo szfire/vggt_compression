@@ -170,15 +170,16 @@ class DynamicBatchSampler(Sampler):
                 )
 
                 # Calculate batch size based on max images per GPU and current image number
-                batch_size = self.max_img_per_gpu / random_image_num
+                # batch_size = self.max_img_per_gpu / random_image_num
 
-                print(f"\n\n\nbatch_size1 = {batch_size}")
+                # print(f"\n\n\nbatch_size1 = {batch_size}")
 
-                batch_size = np.floor(batch_size).astype(int)
+                # batch_size = np.floor(batch_size).astype(int)
 
-                print(f"batch_size2 = {batch_size}")
+                # print(f"batch_size2 = {batch_size}")
 
-                batch_size = max(1, batch_size)  # Ensure batch size is at least 1
+                # batch_size = max(1, batch_size)  # Ensure batch size is at least 1
+                batch_size = 1
 
                 print(f"batch_size3 = {batch_size}")
 
